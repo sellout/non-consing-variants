@@ -1,5 +1,3 @@
-This is the stub README.txt for the "non-consing-variants" project.
-
 There is only a single macro in non-consing-variants. It is `!`. By wrapping a normally-consing form in this macro, the non-consing variant of that form will be used. EG:
 
 ```
@@ -16,4 +14,4 @@ I tend to exclusively use the safer consing versions throughout my code, and onl
 
 and recompile to disable all of those optimizations and see if the issue goes away.
 
-In addition to the `!` macro, there is a variable, `*non-consing-variants*` that is an alist to contain pairs of (consing . non-consing) symbols that don't follow the common FOO/NFOO naming pattern (which are handled automatically by the macro).
+In addition to the `!` macro, there is a variable, `*NON-CONSING-VARIANTS*`, that is an alist to contain pairs of (consing . non-consing) symbols that don't follow the common `FOO`/`NFOO` naming pattern (which are handled automatically by the macro).
