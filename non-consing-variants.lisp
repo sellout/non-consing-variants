@@ -21,7 +21,9 @@
     (if non-consing-variant
         (if (fboundp non-consing-variant)
             (cons non-consing-variant (cdr form))
-            (warn "~a is not defined as a function." non-consing-variant))
+            (progn
+              (warn "~a is not defined as a function." non-consing-variant)
+              form))
         (let ((non-consing-symbol
                (find-symbol (concatenate 'string
                                          "N"
@@ -29,4 +31,6 @@
                             (symbol-package consing-symbol))))
           (if (fboundp non-consing-symbol)
             (cons non-consing-symbol (cdr form))
-            (warn "No non-consing variant of ~a is known." consing-symbol))))))
+            (progn
+              (warn "No non-consing variant of ~a is known." consing-symbol)
+              form))))))

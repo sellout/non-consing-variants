@@ -37,3 +37,17 @@
     (push '(ldiff . abcdefg) *non-consing-variants*)
     (unwind-protect (macroexpand-1 '(! (ldiff 'a 'b)))
       (pop *non-consing-variants*))))
+
+(test should-leave-intact-if-no-replacement
+  (is (equal '(cons 'a 'b)
+             (handler-bind ((warning #'muffle-warning))
+               (macroexpand-1 '(! (cons 'a 'b)))))))
+
+(test should-leave-intact-if-bad-pair
+  (push '(ldiff . abcdefg) *non-consing-variants*)
+  (unwind-protect
+       (is (equal '(ldiff 'a 'b)
+                  (handler-bind ((warning #'muffle-warning))
+                    (macroexpand-1 '(! (ldiff 'a 'b))))))
+    (pop *non-consing-variants*)))
+
